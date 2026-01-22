@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat App</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="login-container" class="container">
+    <h1>Chat App</h1>
+
+    <div class="tabs">
+        <button id="loginTab" class="active">Login</button>
+        <button id="registerTab">Registrati</button>
+    </div>
+
+    <div id="login-form" class="form">
+        <input type="text" id="login-username" placeholder="Username">
+        <input type="password" id="login-password" placeholder="Password">
+        <button onclick="login()">Accedi</button>
+    </div>
+
+    <div id="register-form" class="form hidden">
+        <input type="text" id="register-username" placeholder="Username">
+        <input type="password" id="register-password" placeholder="Password">
+        <button onclick="register()">Registrati</button>
+    </div>
+</div>
+
+<div id="chat-container" class="container hidden">
+    <div class="chat-header">
+        <span id="welcome"></span>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <div id="chat-box"></div>
+
+    <div class="chat-input">
+        <input type="text" id="message-input" placeholder="Scrivi un messaggio...">
+        <button onclick="sendMessage()">Invia</button>
+    </div>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
