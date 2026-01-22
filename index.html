@@ -2,46 +2,364 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Chat App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Chat App - Messaggistica in tempo reale">
+    <meta name="theme-color" content="#667eea">
+    
+    <title>Chat App | Messaggistica Istantanea</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💬</text></svg>">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <!-- ==================== LOGIN/REGISTER ==================== -->
+    <main id="auth-container" class="container">
+        <div class="auth-card">
+            <!-- Logo e Header -->
+            <header class="auth-header">
+                <div class="logo">
+                    <span class="logo-icon">💬</span>
+                    <h1>ChatApp</h1>
+                </div>
+                <p class="tagline">Connettiti con chi vuoi, quando vuoi</p>
+            </header>
 
-<div id="login-container" class="container">
-    <h1>Chat App</h1>
+            <!-- Tab Navigation -->
+            <nav class="tabs" role="tablist" aria-label="Autenticazione">
+                <button 
+                    id="loginTab" 
+                    class="tab active" 
+                    role="tab" 
+                    aria-selected="true"
+                    aria-controls="login-form"
+                >
+                    Accedi
+                </button>
+                <button 
+                    id="registerTab" 
+                    class="tab" 
+                    role="tab" 
+                    aria-selected="false"
+                    aria-controls="register-form"
+                >
+                    Registrati
+                </button>
+                <span class="tab-indicator"></span>
+            </nav>
 
-    <div class="tabs">
-        <button id="loginTab" class="active">Login</button>
-        <button id="registerTab">Registrati</button>
+            <!-- Login Form -->
+            <form id="login-form" class="form" role="tabpanel" aria-labelledby="loginTab">
+                <div class="input-group">
+                    <label for="login-username" class="sr-only">Username</label>
+                    <span class="input-icon">👤</span>
+                    <input 
+                        type="text" 
+                        id="login-username" 
+                        name="username"
+                        placeholder="Username"
+                        autocomplete="username"
+                        required
+                        minlength="3"
+                    >
+                </div>
+                
+                <div class="input-group">
+                    <label for="login-password" class="sr-only">Password</label>
+                    <span class="input-icon">🔒</span>
+                    <input 
+                        type="password" 
+                        id="login-password" 
+                        name="password"
+                        placeholder="Password"
+                        autocomplete="current-password"
+                        required
+                        minlength="6"
+                    >
+                    <button type="button" class="toggle-password" aria-label="Mostra password">
+                        👁️
+                    </button>
+                </div>
+
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="remember-me">
+                        <span class="checkmark"></span>
+                        Ricordami
+                    </label>
+                    <a href="#" class="forgot-link">Password dimenticata?</a>
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    <span>Accedi</span>
+                    <span class="btn-icon">→</span>
+                </button>
+
+                <div class="divider">
+                    <span>oppure continua con</span>
+                </div>
+
+                <div class="social-login">
+                    <button type="button" class="btn-social" aria-label="Accedi con Google">
+                        🔵 Google
+                    </button>
+                    <button type="button" class="btn-social" aria-label="Accedi con GitHub">
+                        ⚫ GitHub
+                    </button>
+                </div>
+            </form>
+
+            <!-- Register Form -->
+            <form id="register-form" class="form hidden" role="tabpanel" aria-labelledby="registerTab">
+                <div class="input-group">
+                    <label for="register-email" class="sr-only">Email</label>
+                    <span class="input-icon">📧</span>
+                    <input 
+                        type="email" 
+                        id="register-email" 
+                        name="email"
+                        placeholder="Email"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label for="register-username" class="sr-only">Username</label>
+                    <span class="input-icon">👤</span>
+                    <input 
+                        type="text" 
+                        id="register-username" 
+                        name="username"
+                        placeholder="Username"
+                        autocomplete="username"
+                        required
+                        minlength="3"
+                        pattern="[a-zA-Z0-9_]+"
+                    >
+                </div>
+                
+                <div class="input-group">
+                    <label for="register-password" class="sr-only">Password</label>
+                    <span class="input-icon">🔒</span>
+                    <input 
+                        type="password" 
+                        id="register-password" 
+                        name="password"
+                        placeholder="Password (min. 6 caratteri)"
+                        autocomplete="new-password"
+                        required
+                        minlength="6"
+                    >
+                    <div class="password-strength">
+                        <div class="strength-bar"></div>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="register-confirm" class="sr-only">Conferma Password</label>
+                    <span class="input-icon">🔐</span>
+                    <input 
+                        type="password" 
+                        id="register-confirm" 
+                        name="confirm-password"
+                        placeholder="Conferma password"
+                        autocomplete="new-password"
+                        required
+                    >
+                </div>
+
+                <label class="checkbox-label terms">
+                    <input type="checkbox" id="accept-terms" required>
+                    <span class="checkmark"></span>
+                    Accetto i <a href="#">Termini di Servizio</a> e la <a href="#">Privacy Policy</a>
+                </label>
+
+                <button type="submit" class="btn btn-primary">
+                    <span>Crea Account</span>
+                    <span class="btn-icon">🚀</span>
+                </button>
+            </form>
+        </div>
+
+        <!-- Background Animation -->
+        <div class="bg-animation">
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+        </div>
+    </main>
+
+    <!-- ==================== CHAT ==================== -->
+    <div id="chat-container" class="container hidden">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <header class="sidebar-header">
+                <div class="user-profile">
+                    <div class="avatar" id="user-avatar">
+                        <img src="" alt="Avatar utente">
+                        <span class="status-dot online"></span>
+                    </div>
+                    <div class="user-info">
+                        <span class="username" id="current-user"></span>
+                        <span class="user-status">Online</span>
+                    </div>
+                </div>
+                <button class="btn-icon-only" id="settings-btn" aria-label="Impostazioni">
+                    ⚙️
+                </button>
+            </header>
+
+            <!-- Search -->
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input 
+                    type="search" 
+                    id="search-users" 
+                    placeholder="Cerca conversazioni..."
+                    aria-label="Cerca conversazioni"
+                >
+            </div>
+
+            <!-- Conversations List -->
+            <nav class="conversations-list" aria-label="Lista conversazioni">
+                <div class="list-header">
+                    <h2>Messaggi</h2>
+                    <button class="btn-icon-only" aria-label="Nuova conversazione">➕</button>
+                </div>
+                <ul id="conversations" role="list">
+                    <!-- Populated by JS -->
+                </ul>
+            </nav>
+
+            <!-- Online Users -->
+            <div class="online-users">
+                <h3>Online ora <span class="count" id="online-count">0</span></h3>
+                <div class="users-avatars" id="online-users-list">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="chat-main">
+            <!-- Chat Header -->
+            <header class="chat-header">
+                <button class="btn-icon-only mobile-menu" aria-label="Menu">
+                    ☰
+                </button>
+                <div class="chat-info">
+                    <div class="avatar small">
+                        <img src="" alt="" id="chat-avatar">
+                        <span class="status-dot online"></span>
+                    </div>
+                    <div class="chat-details">
+                        <h2 id="chat-name">Chat Generale</h2>
+                        <span class="typing-indicator hidden" id="typing-indicator">
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            sta scrivendo...
+                        </span>
+                    </div>
+                </div>
+                <div class="chat-actions">
+                    <button class="btn-icon-only" aria-label="Chiamata vocale">📞</button>
+                    <button class="btn-icon-only" aria-label="Videochiamata">📹</button>
+                    <button class="btn-icon-only" aria-label="Info chat">ℹ️</button>
+                    <button class="btn-icon-only" id="logout-btn" aria-label="Logout">🚪</button>
+                </div>
+            </header>
+
+            <!-- Messages Container -->
+            <div class="chat-messages" id="chat-box" role="log" aria-live="polite" aria-label="Messaggi">
+                <!-- Welcome Message -->
+                <div class="welcome-message">
+                    <span class="emoji">👋</span>
+                    <h3>Benvenuto nella chat!</h3>
+                    <p>I messaggi appariranno qui</p>
+                </div>
+            </div>
+
+            <!-- Message Input -->
+            <footer class="chat-input-container">
+                <div class="input-wrapper">
+                    <button class="btn-icon-only" id="emoji-btn" aria-label="Inserisci emoji">
+                        😊
+                    </button>
+                    <button class="btn-icon-only" id="attach-btn" aria-label="Allega file">
+                        📎
+                    </button>
+                    <input 
+                        type="text" 
+                        id="message-input" 
+                        placeholder="Scrivi un messaggio..."
+                        aria-label="Scrivi un messaggio"
+                        autocomplete="off"
+                    >
+                    <button class="btn-icon-only" id="voice-btn" aria-label="Messaggio vocale">
+                        🎤
+                    </button>
+                </div>
+                <button class="btn btn-send" id="send-btn" aria-label="Invia messaggio">
+                    <span class="send-icon">➤</span>
+                </button>
+            </footer>
+        </main>
+
+        <!-- Emoji Picker (Hidden by default) -->
+        <div class="emoji-picker hidden" id="emoji-picker">
+            <div class="emoji-grid">
+                <!-- Populated by JS -->
+            </div>
+        </div>
     </div>
 
-    <div id="login-form" class="form">
-        <input type="text" id="login-username" placeholder="Username">
-        <input type="password" id="login-password" placeholder="Password">
-        <button onclick="login()">Accedi</button>
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toast-container" aria-live="assertive">
+        <!-- Toasts appear here -->
     </div>
 
-    <div id="register-form" class="form hidden">
-        <input type="text" id="register-username" placeholder="Username">
-        <input type="password" id="register-password" placeholder="Password">
-        <button onclick="register()">Registrati</button>
-    </div>
-</div>
+    <!-- Settings Modal -->
+    <dialog id="settings-modal" class="modal">
+        <div class="modal-content">
+            <header class="modal-header">
+                <h2>⚙️ Impostazioni</h2>
+                <button class="btn-close" aria-label="Chiudi">&times;</button>
+            </header>
+            <div class="modal-body">
+                <div class="setting-group">
+                    <h3>🎨 Tema</h3>
+                    <div class="theme-options">
+                        <button class="theme-btn" data-theme="light">☀️ Chiaro</button>
+                        <button class="theme-btn" data-theme="dark">🌙 Scuro</button>
+                        <button class="theme-btn active" data-theme="auto">🔄 Auto</button>
+                    </div>
+                </div>
+                <div class="setting-group">
+                    <h3>🔔 Notifiche</h3>
+                    <label class="switch-label">
+                        <span>Suoni notifiche</span>
+                        <input type="checkbox" id="sound-notifications" checked>
+                        <span class="switch"></span>
+                    </label>
+                    <label class="switch-label">
+                        <span>Notifiche desktop</span>
+                        <input type="checkbox" id="desktop-notifications">
+                        <span class="switch"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </dialog>
 
-<div id="chat-container" class="container hidden">
-    <div class="chat-header">
-        <span id="welcome"></span>
-        <button onclick="logout()">Logout</button>
-    </div>
-
-    <div id="chat-box"></div>
-
-    <div class="chat-input">
-        <input type="text" id="message-input" placeholder="Scrivi un messaggio...">
-        <button onclick="sendMessage()">Invia</button>
-    </div>
-</div>
-
-<script src="js/app.js"></script>
+    <script src="js/app.js" defer></script>
 </body>
 </html>
